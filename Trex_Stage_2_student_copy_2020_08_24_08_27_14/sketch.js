@@ -51,8 +51,9 @@ function draw() {
   
   trex.depth = trex.depth +1;
   
-  if(keyDown("space")) {
+  if(keyDown("space") && trex.y>=159) {
     trex.velocityY =-6;
+    jumpSound.play();
   }
   
   trex.velocityY = trex.velocityY + 1.6;
@@ -63,6 +64,11 @@ function draw() {
   }
   
   trex.collide(invisibleGround);
+  
+  if(obstaclesGroup.isTouching(trex)){
+   gameState = END;
+   die.play();
+  }
   
   
   spawnClouds();
